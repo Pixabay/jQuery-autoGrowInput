@@ -17,8 +17,9 @@ http://goodies.pixabay.com/jquery/auto-grow-input/demo.html
 ## Features
 
 * Lightweight: 1.0 kB of JavaScript - less than 0.6 kB gzipped
-* Autosize text input fields dynamically while typing
-* Set maxWidth and minWidth on the input fields
+* Autosizes text input fields dynamically while typing
+* Set maxWidth and minWidth
+* May be used in responsive designs
 
 ## Changelog
 

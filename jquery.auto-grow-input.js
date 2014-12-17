@@ -11,10 +11,10 @@
         var o = $.extend({ maxWidth: 500, minWidth: 20, comfortZone: 0 }, options),
             event = 'oninput' in document.createElement('input') ? 'input' : 'keydown';
         this.filter('input:text').each(function(){
-            var minWidth = o.minWidth || $(this).width(),
+            var input = $(this),
+                minWidth = o.minWidth || input.width(),
                 val = ' ',
-                input = $(this),
-                comfortZone = o.comfortZone ? o.comfortZone : parseInt($(this).css('fontSize')),
+                comfortZone = o.comfortZone ? o.comfortZone : parseInt(input.css('fontSize')),
                 span = $('<span/>').css({
                     position: 'absolute',
                     top: -9999,
@@ -35,7 +35,7 @@
                     if (newWidth != input.width()) input.width(newWidth);
                 };
             span.insertAfter(input);
-            $(this).on(event+'.autogrow autogrow', check);
+            input.on(event+'.autogrow autogrow', check);
             // init on page load
             check();
         });

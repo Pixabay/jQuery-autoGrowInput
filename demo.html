@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery autoGrowInput Plugin</title>
+    <meta name="description" content="A lightweight autocomplete plugin for jQuery.">
+    <link rel="shortcut icon" href="//pixabay.com/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <style>
+        body { margin: 0; padding: 0; border: 0; min-width: 320px; color: #777; }
+        html, button, input, select, textarea, .pure-g [class *= "pure-u"] { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1.02em; }
+        p, td { line-height: 1.5; }
+        ul { padding: 0 0 0 20px; }
+
+        th { background: #eee; white-space: nowrap; }
+        th, td { padding: 10px; text-align: left; vertical-align: top; font-size: .9em; font-weight: normal; border-right: 1px solid #fff; }
+        td:first-child { white-space: nowrap; color: #008000; width: 1%; font-style: italic; }
+
+        h1, h2, h3 { color: #4b4b4b; font-family: "Source Sans Pro", sans-serif; font-weight: 300; margin: 0 0 1.2em; }
+        h1 { font-size: 4.5em; color: #1f8dd6; margin: 0 0 .4em; }
+        h2 { font-size: 2em; color: #636363; }
+        h3 { font-size: 1.8em; color: #4b4b4b; margin: 1.8em 0 .8em }
+        h4 { font: bold 1em sans-serif; color: #636363; margin: 4em 0 1em; }
+        a { color: #4e99c7; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        p, pre { margin: 0 0 1.2em; }
+        ::selection { color: #fff; background: #328efd; }
+        ::-moz-selection { color: #fff; background: #328efd; }
+
+        @media (max-width:480px) {
+            h1 { font-size: 3em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+            td:first-child { white-space: normal; }
+        }
+
+        .inline-code { padding: 1px 5px; background: #eee; border-radius: 2px; }
+        pre { padding: 15px 10px; font-size: .9em; color: #555; background: #edf3f8; }
+        pre i { color: #aaa; } /* comments */
+        pre b { font-weight: normal; color: #cf4b25; } /* strings */
+        pre em { color: #0c59e9; } /* numeric */
+
+        /* Pure CSS */
+        .pure-button { margin: 5px 0; text-decoration: none !important; }
+        .button-lg { margin: 5px 0; padding: .65em 1.6em; font-size: 105%; }
+
+        input[type="text"] { display: inline !important; margin: 0; }
+    </style>
+</head>
+<body>
+    <div style="max-width:900px;padding:0 10px;margin:40px auto;text-align:center">
+        <h1>autoGrowInput</h1>
+        <h2>A lightweight jQuery plugin for making text input fields grow and shrink dynamically while typing.</h2>
+        <a style="margin:5px 0" href="https://github.com/Pixabay/jQuery-autoGrowInput/archive/master.zip" class="pure-button pure-button-primary button-lg">Download</a>
+        &nbsp;
+        <a style="margin:5px 0" href="https://github.com/Pixabay/jQuery-autoGrowInput" class="pure-button button-lg">View on GitHub</a>
+    </div>
+    <form onsubmit="$('#demo-input').blur().focus();return false;" class="pure-form" style="border-top: 1px solid #eee;border-bottom:1px solid #eee;background:#fafafa;margin:30px 0;padding:20px 10px;text-align:center">
+        <div id="demo-input-container" style="margin:auto;width:100%;max-width:600px">
+            <input id="demo-input" autofocus type="text" name="q" placeholder="Enter text ...">
+        </div>
+    </form>
+    <div style="max-width:900px;margin:auto;padding:0 10px 50px">
+        <h3>Overview and Features</h3>
+        <p>
+            Released under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.
+            Source on <a href="https://github.com/Pixabay/jQuery-autoGrowInput">Github</a> (<a href="https://github.com/Pixabay/jQuery-autoGrowInput#changelog">changelog</a>).
+            Compatible with jQuery 1.7.0+ in Firefox, Safari, Chrome, Opera, Internet Explorer 7+. No dependencies except the jQuery library.
+        </p>
+        <ul>
+            <li>Lightweight: 1.0 kB of JavaScript - less than 0.6 kB gzipped</li>
+            <li>Autosizes text input fields dynamically while typing</li>
+            <li>Set maxWidth and minWidth</li>
+            <li>May be used in responsive designs</li>
+        </ul>
+        <p>
+            This plugin was developed by and for <a href="http://pixabay.com/">Pixabay.com</a> - an international repository for free Public Domain images.
+            It is based on a <a href="http://stackoverflow.com/questions/931207">Stackoverflow answer</a> by James Padolsey.
+            We have implemented this piece of software in production and we share it - in the spirit of Pixabay - freely with others.
+        </p>
+
+        <h3>Usage</h3>
+        <p>
+            Include the JavsScript file <span class="inline-code">jquery.auto-grow-input.min.js</span> after loading the jQuery library.
+            autoGrowInput accepts settings from an object of key/value pairs, and can be assigned to any text input field.
+        </p>
+        <pre>
+$(selector).autoGrowInput({key1: value1, key2: value2});
+</pre>
+
+        <h3>Settings</h3>
+        <table>
+            <tr><th>Property</th><th>Default</th><th>Description</th></tr>
+            <tr><td>maxWidth</td><td>500</td><td>Maximum width of the input field. This value must either be an integer or a function that returns an integer. A function can be useful for responsive designs (example: source code of this demo).</td></tr>
+            <tr><td>minWidth</td><td>20</td><td>Minimum width of the input field.</td></tr>
+            <tr><td>comfortZone</td><td>0</td><td>Extra space after the last character in the input field. By default the width of one character is used.</td></tr>
+        </table>
+
+        <h3>Example</h3>
+        <pre>$(<b>'#my-input'</b>).autoGrowInput({ minWidth: 100, maxWidth: 600, comfortZone: 40 });</pre>
+
+        <h3>Manual Triggering</h3>
+        <p>autoGrowInput may be triggered manually with the following event:</p>
+        <pre>$(<b>'#my-input'</b>).trigger(<b>'autogrow'</b>);</pre>
+        <p>This may be useful for responsive designs, when the input field is affected by an orientation change or on window resize.</p>
+
+        <div style="margin:60px 0 40px;overflow:hidden;border-top:1px solid #eee;padding-top:40px">
+            <span id="github_social"></span>
+            <div style="float:left;margin-right:5px">
+                <a href="#" data-width="70" class="twitter-share-button" data-text="jQuery autoGrowInput Plugin"></a>
+            </div>
+            <div style="float:left">
+                <div class="g-plusone" data-size="medium"></div>
+            </div>
+            <div style="float:left;width:140px" class="fb-like" data-send="false" data-layout="button_count" data-width="140" data-show-faces="false"></div>
+        </div>
+
+        <p>Please report any bugs and issues at the <a href="https://github.com/Pixabay/jQuery-autoGrowInput">GitHub repositiory</a>.</p>
+        <p>This software is released as Open Source under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a> by <a href="http://pixabay.com/users/Simon/">Simon Steinberger / Pixabay.com</a>.</p>
+    </div>
+
+    <div style="background:#fafafa;border-top:1px solid #eee;padding:15px;font-size:.9em">
+        <div style="max-width:900px;margin:auto;padding:0 10px">
+            <a style="float:right;margin-left:20px" href="http://pixabay.com/en/service/about/">About Us</a>
+            <a style="float:right;margin-left:20px" href="http://pixabay.com/en/blog/">Blog</a>
+            <a style="float:right;margin-left:20px" href="http://goodies.pixabay.com/">More Goodies</a>
+            © <a href="http://pixabay.com/">Pixabay.com</a> / Simon Steinberger / Hans Braxmeier
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="jquery.auto-grow-input.js"></script>
+    <script>
+        $(function(){
+            $('#demo-input').autoGrowInput({ minWidth: 180, maxWidth: function(){ return $('#demo-input-container').width()-40; }, comfortZone: 40 });
+        });
+        $(window).resize(function(){ $('#demo-input').trigger('autogrow'); });
+
+        if (~window.location.href.indexOf('http')) {
+            (function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();
+            (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "https://connect.facebook.net/en_US/all.js#xfbml=1";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+            $('#github_social').html('\
+                <iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=jQuery-autoGrowInput&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
+                <iframe style="float:left;margin-right:15px" src="//ghbtns.com/github-btn.html?user=Pixabay&repo=jQuery-autoGrowInput&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>\
+            ');
+        }
+    </script>
+</body>
+</html>

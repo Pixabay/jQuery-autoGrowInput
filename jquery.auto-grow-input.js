@@ -14,7 +14,7 @@
             var input = $(this),
                 minWidth = o.minWidth || input.width(),
                 val = ' ',
-                comfortZone = o.comfortZone ? o.comfortZone : parseInt(input.css('fontSize')),
+                comfortZone = (options && 'comfortZone' in options) ? o.comfortZone : parseInt(input.css('fontSize')),
                 span = $('<span/>').css({
                     position: 'absolute',
                     top: -9999,

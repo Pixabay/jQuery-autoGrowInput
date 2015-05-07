@@ -24,7 +24,8 @@
                     fontFamily: input.css('fontFamily'),
                     fontWeight: input.css('fontWeight'),
                     letterSpacing: input.css('letterSpacing'),
-                    whiteSpace: 'nowrap'
+                    whiteSpace: 'nowrap',
+                    ariaHidden: true
                 }),
                 check = function(e){
                     if (val === (val = input.val()) && !e.type == 'autogrow') return;

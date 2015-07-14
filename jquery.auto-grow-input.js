@@ -29,7 +29,7 @@
                 }),
                 check = function(e){
                     if (val === (val = input.val()) && !e.type == 'autogrow') return;
-                    if (!val) val = input.prop('placeholder');
+                    if (!val) val = input.attr('placeholder') || '';
                     span.html(val.replace(/&/g, '&amp;').replace(/\s/g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
                     var newWidth = span.width() + comfortZone, mw = typeof(o.maxWidth) == "function" ? o.maxWidth() : o.maxWidth;
                     if (newWidth > mw) newWidth = mw;

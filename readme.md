@@ -23,6 +23,10 @@ https://goodies.pixabay.com/jquery/auto-grow-input/demo.html
 
 ## Changelog
 
+### Version 1.0.1 - 2015/10/04
+
+* Fixed #6: jQuery input:text selector ignores text based html5 inputs
+
 ### Version 1.0.0 - 2014/12/17
 
 * Initial release

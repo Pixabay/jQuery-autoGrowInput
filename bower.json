@@ -1,7 +1,7 @@
 {
     "name": "jquery-auto-grow-input",
 	"description": "A lightweight jQuery plugin for making text input fields grow and shrink dynamically while typing.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "dependencies": {
         "jquery": ">=1.7"
     },

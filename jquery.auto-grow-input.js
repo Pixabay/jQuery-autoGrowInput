@@ -1,5 +1,5 @@
 /*
-	jQuery autoGrowInput v1.0.0
+	jQuery autoGrowInput v1.0.1
     Copyright (c) 2014 Simon Steinberger / Pixabay
     Based on stackoverflow.com/questions/931207 (James Padolsey)
     GitHub: https://github.com/Pixabay/jQuery-autoGrowInput
@@ -10,7 +10,7 @@
     $.fn.autoGrowInput = function(options){
         var o = $.extend({ maxWidth: 500, minWidth: 20, comfortZone: 0 }, options),
             event = 'oninput' in document.createElement('input') ? 'input' : 'keydown';
-        this.filter('input:text').each(function(){
+        this.each(function(){
             var input = $(this),
                 minWidth = o.minWidth || input.width(),
                 val = ' ',

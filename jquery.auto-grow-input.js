@@ -1,5 +1,5 @@
 /*
-	jQuery autoGrowInput v1.0.1
+	jQuery autoGrowInput v1.0.2
     Copyright (c) 2014 Simon Steinberger / Pixabay
     Based on stackoverflow.com/questions/931207 (James Padolsey)
     GitHub: https://github.com/Pixabay/jQuery-autoGrowInput
@@ -7,12 +7,13 @@
 */
 
 (function($){
+    var event = 'oninput' in document.createElement('input') ? 'input' : 'keydown';
+
     $.fn.autoGrowInput = function(options){
-        var o = $.extend({ maxWidth: 500, minWidth: 20, comfortZone: 0 }, options),
-            event = 'oninput' in document.createElement('input') ? 'input' : 'keydown';
+        var o = $.extend({ maxWidth: 500, minWidth: 20, comfortZone: 0 }, options);
+
         this.each(function(){
             var input = $(this),
-                minWidth = o.minWidth || input.width(),
                 val = ' ',
                 comfortZone = (options && 'comfortZone' in options) ? o.comfortZone : parseInt(input.css('fontSize')),
                 span = $('<span/>').css({
@@ -26,9 +27,9 @@
                     letterSpacing: input.css('letterSpacing'),
                     whiteSpace: 'nowrap',
                     ariaHidden: true
-                }),
+                }).appendTo('body'),
                 check = function(e){
-                    if (val === (val = input.val()) && !e.type == 'autogrow') return;
+                    if (val === (val = input.val()) && e.type !== 'autogrow') return;
                     if (!val) val = input.attr('placeholder') || '';
                     span.html(val.replace(/&/g, '&amp;').replace(/\s/g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'));
                     var newWidth = span.width() + comfortZone, mw = typeof(o.maxWidth) == "function" ? o.maxWidth() : o.maxWidth;
@@ -36,7 +37,6 @@
                     else if (newWidth < o.minWidth) newWidth = o.minWidth;
                     if (newWidth != input.width()) input.width(newWidth);
                 };
-            span.insertAfter(input);
             input.on(event+'.autogrow autogrow', check);
             // init on page load
             check();

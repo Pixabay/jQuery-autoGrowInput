@@ -1,5 +1,5 @@
 /*
-	jQuery autoGrowInput v1.0.2
+	jQuery autoGrowInput v1.0.3
     Copyright (c) 2014 Simon Steinberger / Pixabay
     Based on stackoverflow.com/questions/931207 (James Padolsey)
     GitHub: https://github.com/Pixabay/jQuery-autoGrowInput
@@ -25,6 +25,7 @@
                     fontFamily: input.css('fontFamily'),
                     fontWeight: input.css('fontWeight'),
                     letterSpacing: input.css('letterSpacing'),
+                    textTransform: input.css('textTransform'),
                     whiteSpace: 'nowrap',
                     ariaHidden: true
                 }).appendTo('body'),

@@ -23,6 +23,10 @@ https://goodies.pixabay.com/jquery/auto-grow-input/demo.html
 
 ## Changelog
 
+### Version 1.0.3 - 2015/10/29
+
+* Fixed #10: Take textTransform CSS property into account
+
 ### Version 1.0.2 - 2015/10/12
 
 * Merged #7: Prevent creation of shadow input element on each plugin invocation
